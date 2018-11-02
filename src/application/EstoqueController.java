@@ -8,15 +8,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class AppController {
+public class EstoqueController {
 	
-	@FXML // Metodo para abrir janela que gerencia o estoque
-	public void estoque() {
+	@FXML // Metodo para abrir janela de seleção
+	public void voltar() {
 		
 		try {
 			
 			// Aplicando novas configurações
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("Estoque.fxml"));
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("App.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
@@ -32,10 +32,4 @@ public class AppController {
 			JOptionPane.showConfirmDialog(null, "ERRO - Inicializar modulo estoque");
 		}
 	}
-	
-	@FXML // Finaliza o programa
-	public void sair() {
-		System.exit(1);
-	}
-	
 }
