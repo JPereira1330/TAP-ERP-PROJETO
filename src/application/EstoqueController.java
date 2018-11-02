@@ -5,10 +5,13 @@ import javax.swing.JOptionPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class EstoqueController {
+	
+	@FXML TableView<Produto> tbTabela;
 	
 	@FXML // Metodo para abrir janela de seleção
 	public void voltar() {
