@@ -7,18 +7,17 @@ import java.util.ArrayList;
 
 import application.Produto;
 import db.Conexao;
-import javafx.scene.control.Alert.AlertType;
 
-public class EstoqueModel {
+public class LoginModel {
 
 	/**
-	 * Metodo responsavel por inserir um novo produto no estoque
+	 * Metodo responsavel por inserir um novo usuario no banco de dados
 	 * 
-	 * @param produto <String> Nome do produto
-	 * @param quantia <Integer> Quantia de peças do produto em estoque
-	 * @param preco <Float>	Preço de cada peça
+	 * @param user <String> Nome do usuario
+	 * @param pass <String> Senha do usuario
+	 * @param nome <String> nome do usuario
 	 */
-	public static void inserir(String produto, int quantia, float preco) {
+	public static void inserir(String user, String pass, String nome) {
 		
 		try {
 			
@@ -26,11 +25,11 @@ public class EstoqueModel {
 			Connection conn = Conexao.getConexao();
 			
 			// Preparando o codigo de inserção no banco de dados
-			String sql = "INSERT INTO estoque (Produto, Quantia, Preco) VALUES (?,?,?)";
+			String sql = "INSERT INTO usuarios (user, pass, nome) VALUES (?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, produto);
-			ps.setInt(2, quantia);
-			ps.setFloat(3, preco);
+			ps.setString(1, user);
+			ps.setString(2, pass);
+			ps.setString(3, nome);
 			
 			// Executando comando
 			ps.executeUpdate();
@@ -45,40 +44,30 @@ public class EstoqueModel {
 	}
 	
 	/**
-	 * Metodo responsavel por retornar os produto no estoque
+	 * Metodo responsavel por procurar o usuario no banco de dados
 	 * 
-	 * @return ArrayList<Produto> Retornar o estoque dos produto 
+	 * @param login <String> Login do usuario
+	 * @param senha <String> Senha do usuario
+	 * 
+	 * @return boolean informando se existe ou não o usuario
 	 */
-	public static ArrayList<Produto> select() {
-		
-		// Criando variavel de retorno
-		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
-		
-		// Craindo objeto Produto para retorno
-		Produto produto;
-		
-		// Limpando ArrayList
-		listaProdutos.clear();
-		
+	public static boolean validar(String login, String senha) {
+
 		try {
 			
 			// Criando a conexão com o banco de dados
 			Connection conn = Conexao.getConexao();
 			
 			// Preparando o codigo de inserção no banco de dados
-			String sql = "SELECT * FROM estoque";
+			String sql = "SELECT * FROM usuario";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
 			// Converte os dados capturados para uma arrayList
 			while(rs.next()) {
-				produto = new Produto(
-						rs.getInt("Id"), 
-						rs.getString("Produto"), 
-						rs.getInt("Quantia"), 
-						rs.getFloat("Preco")
-				);
-				listaProdutos.add(produto);
+				if(rs.getString("User").equals(login))
+					if(rs.getString("Senha").equals(senha))
+						return true;
 			}
 			
 			
@@ -86,7 +75,7 @@ public class EstoqueModel {
 			e.printStackTrace();
 		}
 		
-		return listaProdutos;
+		return false;
 	}
 	
 	/**
@@ -153,6 +142,5 @@ public class EstoqueModel {
 		}
 		
 		return true;
-	}
-	
+	} 
 }

@@ -2,6 +2,8 @@ package application;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,8 +64,8 @@ public class EstoqueController {
 		int produto = Integer.parseInt(tfIdentificador.getText());
 		int quantia = Integer.parseInt(tfQuantia_r.getText());
 
-		// Adicionando no banco de dados
-		EstoqueModel.remover(produto, quantia);
+		// Adicionando no banco de dados e retorna se funcionou ou não
+		boolean situacao = EstoqueModel.remover(produto, quantia);
 		
 		// Adicionando na ArrayList
 		estoque.clear();
@@ -73,6 +75,10 @@ public class EstoqueController {
 		
 		// Atualiza lista de estoque
 		tbTabela.setItems(FXCollections.observableArrayList(estoque));
+		
+		// Informa erro caso exista
+		if(!situacao)
+			JOptionPane.showConfirmDialog(null, "Quantia inferior a 0");
 		
 	}
 	
