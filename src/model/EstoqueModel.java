@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import application.Produto;
 import db.Conexao;
+import javafx.scene.control.Alert.AlertType;
 
 public class EstoqueModel {
 
@@ -56,16 +57,19 @@ public class EstoqueModel {
 		// Craindo objeto Produto para retorno
 		Produto produto;
 		
+		// Limpando ArrayList
+		listaProdutos.clear();
+		
 		try {
 			
 			// Criando a conexão com o banco de dados
 			Connection conn = Conexao.getConexao();
 			
 			// Preparando o codigo de inserção no banco de dados
-			String sql = "SELECT * FROM estoque order by nome";
+			String sql = "SELECT * FROM estoque";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			
+
 			// Converte os dados capturados para uma arrayList
 			while(rs.next()) {
 				produto = new Produto(
@@ -85,17 +89,19 @@ public class EstoqueModel {
 		return listaProdutos;
 	}
 	
-	/* ARRUMAR
 	/**
 	 * Metodo responsavel por remover a quantia dos produto no estoque
-	 * 
-	 * @return boolean	Se a inserção foi sucedida ou não
-	 * @param produto <String> Nome do produto
-	 * @param quantia <Integer> Quantia de peças do produto em estoque
-	 * @param preco <Float>	Preço de cada peça
-	 *
+	 */
 	public static void remover(int id, int quantia) {
 		
+		// Capturar os dados
+		ArrayList<Produto> prod = EstoqueModel.select();
+		
+		// Retirando quantia informada pelo usuario
+		for (int i = 0; i < prod.size(); i++) {
+			if(prod.get(i).getPropId() == id)
+				quantia = prod.get(i).getPropQuantia() - quantia;
+		}
 		
 		try {
 			
@@ -119,6 +125,5 @@ public class EstoqueModel {
 		}
 		
 	}
-	*/
 	
 }

@@ -21,7 +21,10 @@ public class Produto {
 	}
 	
 	public Produto(int id, String produto, int quantia, float preco) {
-		
+		setPropId(id);
+		setPropProduto(produto);
+		setPropQuantia(quantia);
+		setPropPreco(preco);
 	}
 
 	public final SimpleIntegerProperty propIdProperty() {

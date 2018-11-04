@@ -43,14 +43,13 @@ public class EstoqueController {
 		Float preco = Float.parseFloat(tfPreco.getText());
 
 		// Adicionando no banco de dados
-		//EstoqueModel.inserir(produto, quantia, preco);
+		EstoqueModel.inserir(produto, quantia, preco);
 		
 		// Adicionando na ArrayList
-		//estoque.clear();
-		//estoque.add()
+		estoque.clear();
 		
-		Produto objProduto = new Produto(produto,quantia,preco);
-		estoque.add(objProduto);
+		// Refazendo arrayList
+		estoque = EstoqueModel.select();
 		
 		// Atualiza lista de estoque
 		tbTabela.setItems(FXCollections.observableArrayList(estoque));
@@ -58,6 +57,22 @@ public class EstoqueController {
 	
 	@FXML // Metodo responsavel por remover no banco de dados
 	public void remover() {
+
+		// Capturando informações Adicionadas pelo usuario
+		int produto = Integer.parseInt(tfIdentificador.getText());
+		int quantia = Integer.parseInt(tfQuantia_r.getText());
+
+		// Adicionando no banco de dados
+		EstoqueModel.remover(produto, quantia);
+		
+		// Adicionando na ArrayList
+		estoque.clear();
+		
+		// Refazendo arrayList
+		estoque = EstoqueModel.select();
+		
+		// Atualiza lista de estoque
+		tbTabela.setItems(FXCollections.observableArrayList(estoque));
 		
 	}
 	
@@ -86,10 +101,15 @@ public class EstoqueController {
 	
 	@FXML
 	public void initialize() {
+		
+		// Inicializando Tabela
 		inicializaTB();
+		
+		// Preenchendo tabela
+		estoque = EstoqueModel.select();
+		tbTabela.setItems(FXCollections.observableArrayList(estoque));
 	}
 	
-	@FXML
 	private void inicializaTB() {
 		cId.setCellValueFactory(cellData -> cellData.getValue().propIdProperty());
 		cProduto.setCellValueFactory(cellData -> cellData.getValue().propProdutoProperty());
