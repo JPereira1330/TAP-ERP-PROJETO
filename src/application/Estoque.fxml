@@ -17,12 +17,12 @@
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tbTabela" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="32.0" resizable="false" text="ID" />
-                <TableColumn prefWidth="450.0" resizable="false" text="Produto" />
-                  <TableColumn prefWidth="85.0" resizable="false" text="Quantia" />
-                  <TableColumn prefWidth="85.0" resizable="false" text="Preço" />
+                <TableColumn fx:id="cId" prefWidth="32.0" resizable="false" text="ID" />
+                <TableColumn fx:id="cProduto" prefWidth="450.0" resizable="false" text="Produto" />
+                  <TableColumn fx:id="cQuantia" prefWidth="85.0" resizable="false" text="Quantia" />
+                  <TableColumn fx:id="cPreco" prefWidth="85.0" resizable="false" text="Preço" />
               </columns>
             </TableView>
          </center>
@@ -42,7 +42,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <TextField>
+                                          <TextField fx:id="tfProduto">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" />
                                              </VBox.margin>
@@ -62,7 +62,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <TextField />
+                                          <TextField fx:id="tfQuantia" />
                                        </children>
                                     </VBox>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
@@ -72,7 +72,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <TextField />
+                                          <TextField fx:id="tfPreco" />
                                        </children>
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -80,7 +80,7 @@
                                     </VBox>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Button mnemonicParsing="false" text="Adicionar">
+                                          <Button mnemonicParsing="false" onAction="#adicionar" text="Adicionar">
                                              <padding>
                                                 <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                                              </padding>
@@ -111,7 +111,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <TextField>
+                                          <TextField fx:id="tfIdentificador">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" />
                                              </VBox.margin>
@@ -128,7 +128,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <TextField prefWidth="184.0">
+                                          <TextField fx:id="tfQuantia_r" prefWidth="184.0">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" />
                                              </VBox.margin>
