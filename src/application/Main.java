@@ -24,6 +24,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			// Aplicando configurações
+			window.setTitle("Simple ERP");
 			window.setResizable(false);
 			window.setScene(scene);
 			window.show();

@@ -52,7 +52,35 @@ public class LoginController {
 			
 	}
 
+	@FXML // Metodo pra abrir tela de cadastro no sistema
+	public void cadastro() {
+	
+		// Carrega proxima pagina
+		try {
+			
+			// Aplicando novas configurações
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("Cadastro.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
+			// Capturando variaveis
+			Stage window = Main.getWindow();
+			
+			// Aplicando configurações
+			window.setResizable(false);
+			window.setScene(scene);
+			window.show();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	@FXML // Finaliza o programa
 	public void sair() {
 		System.exit(1);
-	}}
+	}
+
+}
