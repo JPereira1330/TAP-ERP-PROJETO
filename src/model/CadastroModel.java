@@ -25,11 +25,11 @@ public class CadastroModel {
 			Connection conn = Conexao.getConexao();
 			
 			// Preparando o codigo de inserção no banco de dados
-			String sql = "INSERT INTO usuarios (user, pass, nome) VALUES (?,?,?)";
+			String sql = "INSERT INTO usuario (User, Nome, Senha) VALUES (?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user);
-			ps.setString(2, pass);
-			ps.setString(3, nome);
+			ps.setString(2, nome);
+			ps.setString(3, pass);
 			
 			// Executando comando
 			ps.executeUpdate();
@@ -51,7 +51,7 @@ public class CadastroModel {
 	 * 
 	 * @return boolean informando se existe ou não o usuario
 	 */
-	public static boolean validar(String login, String senha) {
+	public static boolean validar(String login) {
 
 		try {
 			
@@ -66,7 +66,6 @@ public class CadastroModel {
 			// Converte os dados capturados para uma arrayList
 			while(rs.next()) {
 				if(rs.getString("User").equals(login))
-					if(rs.getString("Senha").equals(senha))
 						return true;
 			}
 			
