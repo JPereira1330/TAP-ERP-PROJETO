@@ -26,6 +26,10 @@ public class EstoqueController {
 	@FXML TextField tfIdentificador;
 	@FXML TextField tfQuantia_r;
 	
+	// Aba Adicionar
+	@FXML TextField tfIdentificador_a;
+	@FXML TextField tfQuantia_a;
+	
 	// Tabela
 	@FXML TableView<Produto> tbTabela;
 	@FXML TableColumn<Produto, Number> cId;
@@ -55,6 +59,27 @@ public class EstoqueController {
 		
 		// Atualiza lista de estoque
 		tbTabela.setItems(FXCollections.observableArrayList(estoque));
+	}
+	
+	@FXML // Metodo responsavel por remover no banco de dados
+	public void incluir() {
+
+		// Capturando informações Adicionadas pelo usuario
+		int produto = Integer.parseInt(tfIdentificador_a.getText());
+		int quantia = Integer.parseInt(tfQuantia_a.getText());
+
+		// Adicionando no banco de dados
+		EstoqueModel.incluir(produto, quantia);
+		
+		// Adicionando na ArrayList
+		estoque.clear();
+		
+		// Refazendo arrayList
+		estoque = EstoqueModel.select();
+		
+		// Atualiza lista de estoque
+		tbTabela.setItems(FXCollections.observableArrayList(estoque));
+		
 	}
 	
 	@FXML // Metodo responsavel por remover no banco de dados

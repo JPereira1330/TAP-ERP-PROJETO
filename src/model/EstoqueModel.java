@@ -155,4 +155,56 @@ public class EstoqueModel {
 		return true;
 	}
 	
+	
+	/**
+	 * Metodo responsavel por incluir mais produtos no estoque
+	 * 
+	 * @return boolean Retornar para informar se funcionou ou não a operação 
+	 */
+	public static boolean incluir (int id, int quantia) {
+		
+		// Variavel auxiliar
+		boolean continuar = true;
+		
+		// Capturar os dados
+		ArrayList<Produto> prod = EstoqueModel.select();
+		
+		// Retirando quantia informada pelo usuario
+		for (int i = 0; i < prod.size(); i++) {
+			
+			// Buscando por produto
+			if(prod.get(i).getPropId() == id) {
+				
+				// Calculando diferença
+				quantia = prod.get(i).getPropQuantia() + quantia;
+				
+			}
+		}
+		
+		try {
+			
+			// Criando a conexão com o banco de dados
+			Connection conn = Conexao.getConexao();
+			
+			// Preparando o codigo de inserção no banco de dados
+			String sql = "UPDATE estoque SET Quantia=(?) WHERE Id = (?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, quantia);
+			ps.setInt(2, id);
+			
+			// Executando comando
+			ps.executeUpdate();
+			
+			// Finalizando conexão
+			conn.close();
+		
+			// Retornando sucesso da remoção
+			return true;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
 }
