@@ -26,6 +26,12 @@ public class Produto {
 		setPropQuantia(quantia);
 		setPropPreco(preco);
 	}
+	
+	@Override
+	public String toString() {
+		return getPropProduto();
+	}
+	
 
 	public final SimpleIntegerProperty propIdProperty() {
 		return this.propId;

@@ -32,7 +32,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="250.0" text="Venda" textAlignment="CENTER">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#vendas" prefWidth="250.0" text="Venda" textAlignment="CENTER">
                      <padding>
                         <Insets bottom="15.0" top="15.0" />
                      </padding>
