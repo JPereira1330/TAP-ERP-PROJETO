@@ -25,7 +25,7 @@
                         <TableColumn fx:id="cPreco" prefWidth="115.0" resizable="false" text="Preço" />
                     </columns>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets left="5.0" right="5.0" />
                      </VBox.margin>
                   </TableView>
                   <HBox alignment="CENTER_RIGHT" fillHeight="false">
@@ -40,14 +40,17 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" text="Finalizar">
+                        <Button mnemonicParsing="false" onAction="#voltar" text="Voltar">
                            <HBox.margin>
-                              <Insets left="15.0" right="5.0" />
+                              <Insets left="15.0" right="15.0" />
                            </HBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                           </padding>
                         </Button>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="15.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
                </children>
@@ -100,7 +103,7 @@
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#adicionar" text="Adicionar">
+                              <Button mnemonicParsing="false" onAction="#adicionar" text="Finalizar">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>

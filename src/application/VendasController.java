@@ -6,11 +6,16 @@ import javax.swing.JOptionPane;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import model.EstoqueModel;
+import model.VendaModel;
 
 public class VendasController {
 
@@ -57,7 +62,10 @@ public class VendasController {
 			
 			// Atualizando valor total
 			tfPrecoTotal.setText("R$ "+calcValorTotal());
-	
+			
+			// Atualizando banco de dados
+			VendaModel.inserir(produto, quantia, preco);
+			
 		}
 		
 		// Caso quantia maior do que estoque
@@ -79,6 +87,29 @@ public class VendasController {
 		return preco;
 	}
 	
+	@FXML // Metodo para abrir janela de seleção
+	public void voltar() {
+		
+		try {
+			
+			// Aplicando novas configurações
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("App.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
+			// Capturando variaveis
+			Stage window = Main.getWindow();
+			
+			// Aplicando configurações
+			window.setResizable(false);
+			window.setScene(scene);
+			window.show();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@FXML	// Inicializador
 	public void initialize() {
 		
@@ -92,9 +123,19 @@ public class VendasController {
 	
 	// Metodo para inicializar tabela
 	public void inicializaTB() {
+		
+		// Inicialzando tabela
 		cProduto.setCellValueFactory(cellData -> cellData.getValue().propProdutoProperty());
 		cQuantia.setCellValueFactory(cellData -> cellData.getValue().propQuantiaProperty());
 		cPreco.setCellValueFactory(cellData -> cellData.getValue().propPrecoProperty());
+		
+		// Inicializando valores
+		ArrayList<Produto> lista = VendaModel.select();
+		carrinhoDeCompras.clear();
+		carrinhoDeCompras.addAll(lista);
+		
+		// Atualiza lista de estoque
+		tbTabela.setItems(FXCollections.observableArrayList(carrinhoDeCompras));
 	}
 	
 	// Metodo para inicializar combobox
